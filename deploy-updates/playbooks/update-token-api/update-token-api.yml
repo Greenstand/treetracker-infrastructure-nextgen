@@ -1,0 +1,32 @@
+---
+- name: deploy update to token service
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: stop token api service
+      systemd:
+        name: treetracker-token-api
+        state: stopped
+
+    - name: remove token api directory
+      file:
+        state: absent
+        path: ~/treetracker-token-api
+
+    - name: ensure directory exists
+      file:
+        path: ~/treetracker-token-api
+        state: directory
+
+    - name: copy token api service
+      unarchive:
+        src: ../../build/treetracker-token-api.tar.gz
+        dest: ~/treetracker-token-api
+
+    - name: restart token api service
+      systemd:
+        name: treetracker-token-api
+        enabled: true
+        state: restarted

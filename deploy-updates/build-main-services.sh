@@ -27,6 +27,6 @@ then
   cd ../../
 fi
 
-./package.sh $ENV
+./scripts/package-main-services.sh $ENV
 
 
