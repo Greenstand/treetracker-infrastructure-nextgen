@@ -1,0 +1,22 @@
+---
+- name: deploy update to admin client
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: remove admin client directory
+      file:
+        state: absent
+        path: /var/www/admin
+
+    - name: ensure directory exists
+      file:
+        path: /var/www/admin
+        state: directory
+
+    - name: copy admin client
+      unarchive:
+        src: ../../build/treetracker-admin-client.tar.gz
+        dest: /var/www/admin
+

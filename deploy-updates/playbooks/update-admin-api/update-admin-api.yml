@@ -1,0 +1,32 @@
+---
+- name: deploy update to admin service
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: stop admin api service
+      systemd:
+        name: treetracker-admin-api
+        state: stopped
+
+    - name: remove admin api directory
+      file:
+        state: absent
+        path: ~/treetracker-admin-api
+
+    - name: ensure directory exists
+      file:
+        path: ~/treetracker-admin-api
+        state: directory
+
+    - name: copy admin api service
+      unarchive:
+        src: ../../build/treetracker-admin-api.tar.gz
+        dest: ~/treetracker-admin-api
+
+    - name: restart admin api service
+      systemd:
+        name: treetracker-admin-api
+        enabled: true
+        state: restarted
