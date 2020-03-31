@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+
+  - name: Copy service files to a remote server
+    copy:
+      src: systemd/treetracker-admin-api.service
+      dest: /etc/systemd/system/
+
+  - name: enable services
+    systemd:
+      name: treetracker-admin-api
+      enabled: true
+
+  - name: daemon reload
+    systemd:
+      daemon-reload: true
+
+
