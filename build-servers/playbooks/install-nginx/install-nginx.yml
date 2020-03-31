@@ -1,0 +1,25 @@
+---
+- hosts: all
+  tasks:
+  - name: install nginx
+    raw: apt-get -y install nginx
+
+  - name: Copy nginx default
+    copy:
+      src: ../config/{{env}}/nginx/default
+      dest: /etc/nginx/sites-available/
+
+  - name: ensure directory exists
+    file:
+      path: /etc/letsencrypt
+      state: directory
+
+  - name: Copy letsencrypt file structure
+    unarchive:
+      src: ../config/{{env}}/letsencrypt.tar.gz
+      dest: /etc/letsencrypt
+
+  - name: restart nginx
+    service:
+      name=nginx
+      state=restarted
