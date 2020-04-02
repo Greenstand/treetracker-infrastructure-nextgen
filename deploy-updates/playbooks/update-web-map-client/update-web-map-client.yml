@@ -1,0 +1,22 @@
+---
+- name: deploy update to web map client
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: remove web map client directory
+      file:
+        state: absent
+        path: /var/www/map/
+
+    - name: ensure directory exists
+      file:
+        path: /var/www/map
+        state: directory
+
+    - name: copy web map client
+      unarchive:
+        src: ../../build/treetracker-web-map-client.tar.gz
+        dest: /var/www/map
+

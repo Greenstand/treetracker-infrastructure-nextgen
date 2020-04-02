@@ -25,6 +25,6 @@ then
 
 fi
 
-./scripts/package-admin.sh $ENV
+./scripts/package-web-map.sh $ENV
 
 

@@ -10,22 +10,16 @@ ENV=$1
 
 find ./build/treetracker-web-map/ -name *.spec.js -exec rm {} \;
 
-cp ../config/$ENV/treetracker-web-map/server/src/datasources/treetracker.datasource.json build/treetracker-admin/server/src/datasources/
-ansible-vault decrypt build/treetracker-admin/server/src/datasources/treetracker.datasource.json
+cp ../config/$ENV/treetracker-web-map/server/config.js build/treetracker-web-map/server/config
+cp ../config/$ENV/treetracker-web-map/client/config.js build/treetracker-web-map/client/js/
 
-cd build/treetracker-admin/server
+cd build/treetracker-web-map/server
 npm i 
-npm run-script clean
-npm run-script build
-cd ../
-cd client
-npm i 
-npm run-script build
 cd ../../../
 
 
-tar -cvzf build/treetracker-admin-api.tar.gz --directory build/treetracker-admin/server/ . &
-tar -cvzf build/treetracker-admin-client.tar.gz --directory build/treetracker-admin/client/build/ . &
+tar -cvzf build/treetracker-web-map-api.tar.gz --directory build/treetracker-web-map/server/ . &
+tar -cvzf build/treetracker-web-map-client.tar.gz --directory build/treetracker-web-map/client/ . &
 
 wait
 

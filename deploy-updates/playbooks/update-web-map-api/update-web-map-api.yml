@@ -1,0 +1,32 @@
+---
+- name: deploy update to web map service
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: stop web map api service
+      systemd:
+        name: treetracker-map-api
+        state: stopped
+
+    - name: remove web map api directory
+      file:
+        state: absent
+        path: ~/treetracker-map-api
+
+    - name: ensure directory exists
+      file:
+        path: ~/treetracker-map-api
+        state: directory
+
+    - name: copy web map api service
+      unarchive:
+        src: ../../build/treetracker-web-map-api.tar.gz
+        dest: ~/treetracker-map-api
+
+    - name: restart web map api service
+      systemd:
+        name: treetracker-map-api
+        enabled: true
+        state: restarted
