@@ -8,15 +8,15 @@
     - name: remove web map client directory
       file:
         state: absent
-        path: /var/www/map/
+        path: /var/www/html/
 
     - name: ensure directory exists
       file:
-        path: /var/www/map
+        path: /var/www/html
         state: directory
 
     - name: copy web map client
       unarchive:
         src: ../../build/treetracker-web-map-client.tar.gz
-        dest: /var/www/map
+        dest: /var/www/html
 

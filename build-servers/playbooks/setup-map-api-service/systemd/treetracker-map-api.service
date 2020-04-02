@@ -1,15 +1,15 @@
 [Unit]
-Description=Treetracker Admin API
+Description=Treetracker Map API
 Documentation=https://github.com/Greenstand
 After=network.target
 
 [Service]
-Environment=NODE_PORT=3002
+Environment=NODE_PORT=3001
 Environment=NODE_ENV=treetracker
 Type=simple
 User=root
-WorkingDirectory=/root/treetracker-admin-api/
-ExecStart=/usr/bin/node /root/treetracker-admin-api/index.js
+WorkingDirectory=/root/treetracker-map-api/
+ExecStart=/usr/bin/node /root/treetracker-map-api/server.js
 Restart=on-failure
 
 [Install]
