@@ -13,6 +13,7 @@ ENV=$1
 
 \rm -Rf build/*
 
+export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass.txt
 ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-admin.git dest=build/treetracker-admin version=release force=yes depth=1"
 
 if [ "$ENV" = "prod" ]
