@@ -1,0 +1,32 @@
+---
+- name: deploy update to analysis microservice
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: stop analysis microservice
+      systemd:
+        name: treetracker-analysis-microservice
+        state: stopped
+
+    - name: remove microservice api directory
+      file:
+        state: absent
+        path: ~/treetracker-analysis-microservice
+
+    - name: ensure directory exists
+      file:
+        path: ~/treetracker-analysis-microservice
+        state: directory
+
+    - name: copy analysis microservice
+      unarchive:
+        src: ../../build/treetracker-analysis-microservice.tar.gz
+        dest: ~/treetracker-analysis-microservice
+
+    - name: restart analysis microservice
+      systemd:
+        name: treetracker-analysis-microservice
+        enabled: true
+        state: restarted
