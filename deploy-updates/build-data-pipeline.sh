@@ -10,8 +10,10 @@ ENV=$1
 
 \rm -Rf build/*
 
-ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-database.git dest=build/treetracker-database force=yes depth=1"
-ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-analysis-pipeline.git dest=build/treetracker-analysis-pipeline force=yes depth=1"
+ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-database.git dest=build/treetracker-database force=yes depth=1" &
+ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-analysis-pipeline.git dest=build/treetracker-analysis-pipeline force=yes depth=1" &
+
+wait
 
 if [ "$ENV" = "prod" ]
 then
