@@ -11,10 +11,24 @@ then
 fi
 ENV=$1
 
+if [ "$2" != "" ]
+then
+  BRANCH=$2
+else
+  BRANCH=release
+fi
+
+if [ "$ENV" = "dar" ] && [ "$2" == "" ]
+then
+  BRANCH="dar-es-salaam"
+fi
+
+echo "Building branch '$BRANCH' using environment '$ENV'"
+
 \rm -Rf build/*
 
 export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass.txt
-ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-admin.git dest=build/treetracker-admin version=release force=yes depth=1"
+ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-admin.git dest=build/treetracker-admin version=$BRANCH force=yes depth=1"
 
 if [ "$ENV" = "prod" ]
 then
