@@ -36,3 +36,21 @@
         name: treetracker-map-api
         enabled: true
         state: restarted
+
+    - name: remove crontab
+      shell: crontab -r || true
+
+    - name: assign new clusters cron
+      cron:
+        name: "assign new clusters cron"
+        job: "/root/treetracker-map-api/cron/assign-new-trees-to-clusters.sh"
+        minute: "*/10"
+
+    - name: remove deactivated trees from cluster totals
+      cron:
+        name: "remove deactivated trees from cluster totals"
+        job: "/root/treetracker-web-map/server/cron/update-clusters-for-deactivated-trees.sh"
+        minute: "15"
+        hour: "*/4"
+
+
