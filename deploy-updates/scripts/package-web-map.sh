@@ -10,7 +10,6 @@ ENV=$1
 
 find ./build/treetracker-web-map/ -name *.spec.js -exec rm {} \;
 
-cp ../config/$ENV/treetracker-web-map/server/config.js build/treetracker-web-map/server/config
 cp ../config/$ENV/treetracker-web-map/client/config.js build/treetracker-web-map/client/js/
 
 cd build/treetracker-web-map/server

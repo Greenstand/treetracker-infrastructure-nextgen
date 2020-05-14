@@ -25,6 +25,12 @@
         src: ../../build/treetracker-web-map-api.tar.gz
         dest: ~/treetracker-map-api
 
+    - name: copy config into place
+      copy:
+        src: ../../../config/test/treetracker-web-map/server/config.js
+        dest: ~/treetracker-map-api/config/config.js
+        decrypt: yes
+
     - name: restart web map api service
       systemd:
         name: treetracker-map-api

@@ -7,6 +7,12 @@ then
 fi
 ENV=$1
 
-export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass.txt
+if [ "$ENV" = "prod" ]
+then
+  export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass_prod.txt
+else
+  export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass.txt
+fi
+
 ansible-playbook  -i ../hosts/$ENV.hosts -l main --user root  playbooks/update-admin-api/update-admin-api.yml
 ansible-playbook  -i ../hosts/$ENV.hosts -l main --user root  playbooks/update-admin-client/update-admin-client.yml

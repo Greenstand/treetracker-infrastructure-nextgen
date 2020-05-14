@@ -21,13 +21,22 @@ fi
 if [ "$ENV" = "dar" ] && [ "$2" == "" ]
 then
   BRANCH="dar-es-salaam"
+elif  [ "$ENV" = "test" ] && [ "$2" == "" ]
+then
+  BRANCH="test-release"
 fi
 
 echo "Building branch '$BRANCH' using environment '$ENV'"
 
 \rm -Rf build/*
 
-export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass.txt
+if [ "$ENV" = "prod" ]
+then
+  export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass_prod.txt
+else
+  export ANSIBLE_VAULT_PASSWORD_FILE=.vault_pass.txt
+fi
+
 ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-admin.git dest=build/treetracker-admin version=$BRANCH force=yes depth=1"
 
 if [ "$ENV" = "prod" ]
