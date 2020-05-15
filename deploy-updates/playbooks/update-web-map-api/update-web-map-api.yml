@@ -27,7 +27,7 @@
 
     - name: copy config into place
       copy:
-        src: ../../../config/test/treetracker-web-map/server/config.js
+        src: ../../../config/{{ env }}/treetracker-web-map/server/config.js
         dest: ~/treetracker-map-api/config/config.js
         decrypt: yes
 
