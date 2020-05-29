@@ -1,0 +1,1 @@
+var configTreetrackerApi = '/api/web/';

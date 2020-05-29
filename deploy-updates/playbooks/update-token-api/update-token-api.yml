@@ -25,6 +25,14 @@
         src: ../../build/treetracker-token-api.tar.gz
         dest: ~/treetracker-token-api
 
+    - name: copy config into place
+      copy:
+        src: "{{ item }}"
+        dest: ~/treetracker-token-api/config/
+        decrypt: yes
+      with_fileglob:
+        - ../../../config/{{ env }}/token-api/*
+
     - name: restart token api service
       systemd:
         name: treetracker-token-api

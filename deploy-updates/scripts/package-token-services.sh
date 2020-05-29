@@ -12,8 +12,6 @@ find ./build/ -name *.spec.js -exec rm {} \;
 
 pwd
 
-cp ../config/$ENV/token-api/* build/treetracker-token-api/config/
-
 cd build/treetracker-token-api/
 npm ci &
 cd ../../
