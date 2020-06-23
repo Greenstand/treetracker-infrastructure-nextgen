@@ -14,11 +14,6 @@
       path: /var/www/nginx
       state: directory
 
-  - name: Copy admin htpasswd
-    copy:
-      src: ../../../config/{{env}}/nginx/admin.htpasswd
-      dest: /var/www/nginx/.htpasswd
-
   - name: ensure directory exists
     file:
       path: /etc/letsencrypt
