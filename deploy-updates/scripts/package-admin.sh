@@ -13,6 +13,9 @@ find ./build/treetracker-admin/ -name *.spec.js -exec rm {} \;
 cp ../config/$ENV/treetracker-admin/server/src/datasources/treetracker.datasource.json build/treetracker-admin/server/src/datasources/
 ansible-vault decrypt build/treetracker-admin/server/src/datasources/treetracker.datasource.json
 
+cp -f ../config/$ENV/treetracker-admin/server/.env build/treetracker-admin/server/
+ansible-vault decrypt build/treetracker-admin/server/.env
+
 cd build/treetracker-admin/server
 npm i 
 npm run-script clean
