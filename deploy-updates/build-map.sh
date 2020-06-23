@@ -32,7 +32,7 @@ ansible localhost -m git -a "repo=git@github.com:Greenstand/treetracker-web-map.
 
 if [ "$ENV" = "prod" ]
 then
-  cd build/treetracker-admin/
+  cd build/treetracker-web-map/
 #  npm version patch
 #  git push --tags origin master
 #  git push -f origin master:production
