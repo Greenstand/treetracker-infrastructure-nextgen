@@ -23,7 +23,7 @@ then
   BRANCH="dar-es-salaam"
 elif  [ "$ENV" = "test" ] && [ "$2" == "" ]
 then
-  BRANCH="test-release"
+  BRANCH="test_release"
 fi
 
 echo "Building branch '$BRANCH' using environment '$ENV'"

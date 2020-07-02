@@ -25,6 +25,19 @@
         src: ../../build/treetracker-admin-api.tar.gz
         dest: ~/treetracker-admin-api
 
+    - name: copy env config
+      copy:
+        src: ../../../config/{{ env }}/treetracker-admin/server/.env 
+        dest: ~/treetracker-admin-api/
+        decrypt: true
+
+    - name: copy database config
+      copy:
+        src: ../../../config/{{ env }}/treetracker-admin/server/src/datasources/treetracker.datasource.json
+        dest: ~/treetracker-admin-api/src/datasources/
+        decrypt: true
+
+
     - name: restart admin api service
       systemd:
         name: treetracker-admin-api
