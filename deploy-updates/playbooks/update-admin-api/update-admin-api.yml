@@ -33,8 +33,8 @@
 
     - name: copy database config
       copy:
-        src: ../../../config/{{ env }}/treetracker-admin/server/src/datasources/treetracker.datasource.json
-        dest: ~/treetracker-admin-api/src/datasources/
+        src: ../../../config/{{ env }}/treetracker-admin/server/dist/datasources/treetracker.datasource.json
+        dest: ~/treetracker-admin-api/dist/datasources/
         decrypt: true
 
 
