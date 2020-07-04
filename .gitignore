@@ -1,3 +1,4 @@
 config
 hosts
 old
+.vault_pass*
