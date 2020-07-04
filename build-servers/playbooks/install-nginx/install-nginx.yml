@@ -19,10 +19,11 @@
       path: /etc/letsencrypt
       state: directory
 
-      #  - name: Copy letsencrypt file structure
-      # unarchive:
-      # src: ../../../config/{{env}}/letsencrypt.tar.gz
-      # dest: /etc/letsencrypt
+  - name: Copy letsencrypt file structure
+    unarchive:
+      src: ../../../config/{{env}}/letsencrypt.tar.gz
+      dest: /
+      decrypt: true
 
   - name: restart nginx
     service:
