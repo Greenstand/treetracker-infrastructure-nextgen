@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+  - name: ensure directory exists
+    file:
+      path: ~/.ssh
+      state: directory
+  - name: install ssh key
+    copy:
+      src: ../../../config/{{ env }}/keys/deploy-public-key
+      dest: ~/.ssh/authorized_keys
+      decrypt: true
+
