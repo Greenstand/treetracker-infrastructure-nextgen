@@ -22,7 +22,7 @@
   - name: Copy letsencrypt file structure
     unarchive:
       src: ../../../config/{{env}}/letsencrypt.tar.gz
-      dest: /
+      dest: /etc
       decrypt: true
 
   - name: restart nginx
