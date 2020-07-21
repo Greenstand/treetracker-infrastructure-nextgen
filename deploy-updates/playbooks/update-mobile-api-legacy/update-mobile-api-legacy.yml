@@ -1,0 +1,40 @@
+---
+- name: deploy update to legacy mobile api service
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    
+    - name: stop mobile api service
+      systemd:
+        name: treetracker-mobile-api
+        state: stopped
+
+    - name: remove mobile api directory
+      file:
+        state: absent
+        path: ~/treetracker-mobile-api
+
+    - name: ensure directory exists
+      file:
+        path: ~/treetracker-mobile-api
+        state: directory
+
+    - name: copy mobile api service
+      unarchive:
+        src: ../../build/treetracker-mobile-api.tar.gz
+        dest: ~/treetracker-mobile-api
+
+    - name: copy config into place
+      copy:
+        src: "{{ item }}"
+        dest: ~/treetracker-mobile-api/config/
+        decrypt: yes
+      with_fileglob:
+        - ../../../config/{{ env }}/mobile-api/*
+
+    - name: restart mobile api service
+      systemd:
+        name: treetracker-mobile-api
+        enabled: true
+        state: restarted
