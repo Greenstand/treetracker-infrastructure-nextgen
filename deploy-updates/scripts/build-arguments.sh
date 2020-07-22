@@ -17,8 +17,17 @@ then
   BRANCH="dar-es-salaam"
 elif  [ "$ENV" = "test" ] && [ "$2" == "" ]
 then
-  BRANCH="test_release"
+  BRANCH="test-release"
 fi
+
+if [ "$3" != "" ]
+then
+  REPOSITORY=$3
+else
+  REPOSITORY=Greenstand/treetracker-web-map
+fi
+
+
 
 echo "Building branch '$BRANCH' using environment '$ENV'"
 
