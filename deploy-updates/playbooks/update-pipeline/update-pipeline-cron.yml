@@ -28,6 +28,13 @@
         src: ../../build/treetracker-pipeline-cron.tar.gz
         dest: ~/treetracker-pipeline-cron
 
+    - name: copy config into place
+      copy:
+        src: ../../../config/{{ env }}/pipeline-cron/config.js
+        dest: ~/treetracker-pipeline-cron/config/config.js
+        decrypt: yes
+
+
     - name: pipeline cron
       cron:
         name: "pipeline cron"

@@ -18,7 +18,7 @@ fi
 
 if  [ "$ENV" = "test" ] && [ "$2" == "" ]
 then
-  BRANCH="test_release"
+  BRANCH="test-release"
 fi
 
 echo "Building branch '$BRANCH' using environment '$ENV'"

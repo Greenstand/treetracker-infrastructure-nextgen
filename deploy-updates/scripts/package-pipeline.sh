@@ -10,11 +10,6 @@ ENV=$1
 
 find ./build/ -name *.spec.js -exec rm {} \;
 
-cp ../config/$ENV/pipeline-consumer/* build/treetracker-data-pipeline/consumer/config/
-cp ../config/$ENV/pipeline-microservice/* build/treetracker-data-pipeline/microservice/config/
-cp ../config/$ENV/pipeline-cron/* build/treetracker-data-pipeline/cron/config/
-cp ../config/$ENV/analysis-microservice/* build/treetracker-analysis-pipeline/analysis-microservice/config/
-
 cd build/treetracker-data-pipeline/consumer/
 npm ci &
 cd ../../../
