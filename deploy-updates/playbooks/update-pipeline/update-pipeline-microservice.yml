@@ -25,6 +25,12 @@
         src: ../../build/treetracker-pipeline-microservice.tar.gz
         dest: ~/treetracker-pipeline-microservice
 
+    - name: copy config into place
+      copy:
+        src: ../../../config/{{ env }}/pipeline-microservice/config.js
+        dest: ~/treetracker-pipeline-microservice/config/config.js
+        decrypt: yes
+
     - name: restart pipeline microservice
       systemd:
         name: treetracker-pipeline-microservice

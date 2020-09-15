@@ -25,6 +25,18 @@
         src: ../../build/treetracker-pipeline-consumer.tar.gz
         dest: ~/treetracker-pipeline-consumer
 
+    - name: copy config into place
+      copy:
+        src: ../../../config/{{ env }}/pipeline-consumer/config.js
+        dest: ~/treetracker-pipeline-consumer/config/config.js
+        decrypt: yes
+
+    - name: copy config into place
+      copy:
+        src: ../../../config/{{ env }}/pipeline-consumer/aws.json
+        dest: ~/treetracker-pipeline-consumer/config/aws.json
+        decrypt: yes
+
     - name: restart sqs consumer
       systemd:
         name: treetracker-pipeline-consumer
