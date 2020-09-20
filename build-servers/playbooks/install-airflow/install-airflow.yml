@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+  - name: install python3
+    raw: apt-get install -y python3.7
+
+  - name: install python3-pip
+    raw: apt-get install -y python3-pip
+
+  - name: install python3.7-dev
+    raw: apt-get install -y python3.7-dev
+
+  - name: install airflow dependencies
+    raw: apt-get install -y --no-install-recommends freetds-bin krb5-user ldap-utils libffi6 libsasl2-2 libsasl2-modules libssl1.1 locales lsb-release sasl2-bin sqlite3 unixodbc
+
+  - name: install airflow
+    raw: pip3 install apache-airflow[postgres,aws]==1.10.10 --constraint https://raw.githubusercontent.com/apache/airflow/1.10.10/requirements/requirements-python3.7.txt
+
+
