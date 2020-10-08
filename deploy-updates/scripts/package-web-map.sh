@@ -10,9 +10,10 @@ ENV=$1
 
 find ./build/treetracker-web-map/ -name *.spec.js -exec rm {} \;
 
-set +e
-cp ../config/$ENV/treetracker-web-map/client/config.js build/treetracker-web-map/client/js/
-set -e
+cd ./build/treetracker-web-map/client/
+npm i
+npm run build
+cd ../../../
 
 cd build/treetracker-web-map/server
 npm i 
@@ -20,7 +21,7 @@ cd ../../../
 
 
 tar -cvzf build/treetracker-web-map-api.tar.gz --directory build/treetracker-web-map/server/ . &
-tar -cvzf build/treetracker-web-map-client.tar.gz --directory build/treetracker-web-map/client/ . &
+tar -cvzf build/treetracker-web-map-client.tar.gz --directory build/treetracker-web-map/client/build/ . &
 
 wait
 
