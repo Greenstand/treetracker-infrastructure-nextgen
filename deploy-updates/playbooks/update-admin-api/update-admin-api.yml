@@ -31,13 +31,6 @@
         dest: ~/treetracker-admin-api/
         decrypt: true
 
-    - name: copy database config
-      copy:
-        src: ../../../config/{{ env }}/treetracker-admin/server/dist/datasources/treetracker.datasource.json
-        dest: ~/treetracker-admin-api/dist/datasources/
-        decrypt: true
-
-
     - name: restart admin api service
       systemd:
         name: treetracker-admin-api
